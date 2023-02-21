@@ -66,8 +66,9 @@ extension ReporteVC: UITableViewDelegate, UITableViewDataSource {
         cell.lblClave.text = "Clave: \(reporte?[indexPath.row].claveVenta ?? "Clave dum")"
         cell.lblNaem.text = "producto: \(reporte?[indexPath.row].nombreProducto ?? "Nombre dum")"
        
-        cell.totalLbl.text = "Total: \(reporte?[indexPath.row].totalVentas ?? 0)"
+        cell.totalLbl.text = "Total: \(reporte?[indexPath.row].total ?? 0)"
         
+        ReporteVC.granTotal += Int(reporte?[indexPath.row].total ?? 0)
         cell.lblCantidad.isHidden = true
         cell.dateLbl.isHidden = true
         cell.lblPrecio.isHidden = true

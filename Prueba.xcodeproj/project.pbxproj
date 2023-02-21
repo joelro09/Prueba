@@ -89,9 +89,19 @@
 			path = Altas;
 			sourceTree = "<group>";
 		};
+		91109AD029A454A0005D0FEE /* Reportes */ = {
+			isa = PBXGroup;
+			children = (
+				9115373529A43704008FA496 /* ReporteVC.swift */,
+				9115373329A4365D008FA496 /* ReporteVentaVC.storyboard */,
+			);
+			path = Reportes;
+			sourceTree = "<group>";
+		};
 		9115373729A43F17008FA496 /* Ventas */ = {
 			isa = PBXGroup;
 			children = (
+				915308DB29A1A9E6006CBF69 /* DetailCompraSB.storyboard */,
 				9153498029A36EA1009F0DC6 /* VentasVC.swift */,
 			);
 			path = Ventas;
@@ -137,18 +147,16 @@
 		915308D829A195B5006CBF69 /* Modulos */ = {
 			isa = PBXGroup;
 			children = (
+				91109AD029A454A0005D0FEE /* Reportes */,
 				91109ACF29A440D1005D0FEE /* Altas */,
 				9115373729A43F17008FA496 /* Ventas */,
 				915308DD29A1E10C006CBF69 /* CustomCells */,
 				915308D929A195F8006CBF69 /* InventarioViewController.swift */,
-				915308DB29A1A9E6006CBF69 /* DetailCompraSB.storyboard */,
 				915308E429A2B172006CBF69 /* BuyVC.swift */,
 				9153496F29A30262009F0DC6 /* CustomTextField.swift */,
 				9153497129A30B7E009F0DC6 /* ShadowView.swift */,
 				9153497A29A36B68009F0DC6 /* ErrorView.storyboard */,
 				9153497C29A36B74009F0DC6 /* ErrorvC.swift */,
-				9115373329A4365D008FA496 /* ReporteVentaVC.storyboard */,
-				9115373529A43704008FA496 /* ReporteVC.swift */,
 			);
 			path = Modulos;
 			sourceTree = "<group>";

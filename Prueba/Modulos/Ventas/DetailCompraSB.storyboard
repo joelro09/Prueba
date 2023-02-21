@@ -58,11 +58,22 @@
                     <connections>
                         <outlet property="TotalVentasLbl" destination="zfv-sC-ap3" id="n6n-aN-YQP"/>
                         <outlet property="tableVentas" destination="LIj-v2-ODv" id="5SU-vw-7Cq"/>
+                        <segue destination="hrb-Wu-RiB" kind="show" identifier="errorSegue" id="JE5-Ae-hwy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="135.1145038167939" y="3.5211267605633805"/>
+        </scene>
+        <!--ErrorView-->
+        <scene sceneID="FJq-ph-gAN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ErrorView" id="hrb-Wu-RiB" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="XjC-Bo-cXk"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hBi-mK-Z5u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="874" y="4"/>
         </scene>
     </scenes>
     <resources>

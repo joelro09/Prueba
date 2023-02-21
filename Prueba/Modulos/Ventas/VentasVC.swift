@@ -17,9 +17,10 @@ class VentasVC: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var errorMessage = ""
-    var setCantidad = false
-    var cantidadTotal = 1
-    var ventaCantidad = 0
+    var isSelected = false
+    var precioTotal = 1
+    var cantidad = 0
+    var indexPath: Int?
     
     //Cambiar a variable de tipo Producto sin datos iniciales
     private var productosVenta: [ProductoVenta]?
@@ -45,9 +46,9 @@ class VentasVC: UIViewController {
             self.productosVenta = try context.fetch(ProductoVenta.fetchRequest())
             DispatchQueue.main.async {
                 self.tableVentas.reloadData()
-                self.TotalVentasLbl.text = "Gran Total: \(self.cantidadTotal)"
+                self.TotalVentasLbl.text = "Gran Total: \(self.precioTotal)"
             }
-            ReporteVC.granTotal = cantidadTotal
+            ReporteVC.granTotal = precioTotal
         } catch {
             print("Error al cargar los datos")
         }
@@ -61,6 +62,7 @@ class VentasVC: UIViewController {
     }
     
     @IBAction func venderAction(_ sender: Any) {
+        
         self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -72,28 +74,41 @@ extension VentasVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let total: Double =  Double((self.ventaCantidad)) * ((productosVenta?[indexPath.row].precioVenta ?? 0))
         let date = Date()
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "YY/MM/dd"
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "buyCell") as! CompraCell
-        cell.lblClave.text = "Clave: \(productosVenta?[indexPath.row].claveProduct ?? "Clave dum")"
-        cell.lblNaem.text = "producto: \(productosVenta?[indexPath.row].nombreProduct ?? "Nombre dum")"
-      
-        cell.lblPrecio.text = "Precio: \(productosVenta?[indexPath.row].precioVenta ?? 0)"
-        cell.dateLbl.text = "Fecha: \(dateFormat.string(from:  date))"
-        //productos?[indexPath.row].fecha ??
-        if setCantidad == true {
-            cell.lblCantidad.isHidden = false
-            cell.lblCantidad.text = "Cantidad: \(self.ventaCantidad)"
-            cell.totalLbl.isHidden = false
+        let producto = productosVenta?[indexPath.row]
+        let productoSelected = productosVenta?[self.indexPath ?? 0]
+        
+        
+        if isSelected == true {
+            if indexPath.row == self.indexPath {
+                let total: Double =  Double(self.cantidad) * ((productoSelected?.precioVenta ?? 0))
+                cell.lblClave.text = "Clave: \(productoSelected?.claveProduct ?? "Clave dum")"
+                cell.lblNaem.text = "producto: \(productoSelected?.nombreProduct ?? "Nombre dum")"
+                cell.lblCantidad.text = "Cantidad Disponible: \(self.cantidad)"
+                productoSelected?.precioVenta = Double(self.cantidad)
+                cell.lblPrecio.text = "Precio: \(productoSelected?.precioVenta ?? 0)"
+                cell.dateLbl.text = "Fecha: \(dateFormat.string(from:  date))"
+                productoSelected?.total = total
+                cell.totalLbl.text = "Total de Articulo: \(total)"
+            }
+            //isSelected.toggle()
+            
+        } else {
+            let total: Double =  Double((producto?.cantidadProduct ?? 0)) * ((producto?.precioVenta ?? 0))
+            cell.lblClave.text = "Clave: \(producto?.claveProduct ?? "Clave dum")"
+            cell.lblNaem.text = "producto: \(producto?.nombreProduct ?? "Nombre dum")"
+            cell.lblCantidad.text = "Cantidad Disponible: \(producto?.cantidadProduct ?? 0)"
+            cell.lblPrecio.text = "Precio: \(producto?.precioVenta ?? 0)"
+            cell.dateLbl.text = "Fecha: \(dateFormat.string(from:  date))"
+            producto?.total = total
             cell.totalLbl.text = "Total de Articulo: \(total)"
-        }else{
-            cell.lblCantidad.isHidden = true
-            cell.totalLbl.isHidden = true
+            self.precioTotal += Int(producto?.total ?? 0)
         }
-        return cell
+         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -103,27 +118,29 @@ extension VentasVC: UITableViewDelegate, UITableViewDataSource {
             
             let textField = alert.textFields![0]
             let cantidad = Int64(textField.text ?? "0")
-            self.setCantidad = true
-           
+            
+            self.indexPath = indexPath.row
+            //self.isSelected = true
+            self.precioTotal = 1
+            
             if cantidad ?? 0 > self.productosVenta?[indexPath.row].cantidadProduct ?? 1 {
                 self.errorMessage = "ERROR: Necesitas dar de alta más \(self.productosVenta?[indexPath.row].nombreProduct ?? "Producto seleccionado")"
                 self.performSegue(withIdentifier: "errorSegue", sender: nil)
             } else {
-                self.cantidadTotal += Int(self.productosVenta?[indexPath.row].precioVenta ?? 0)
+                self.cantidad = Int(cantidad ?? 0)
                 let nuevaVenta = ReporteVentas(context: self.context)
-                nuevaVenta.nombreProducto = self.productosVenta?[indexPath.row].nombreProduct
-                nuevaVenta.totalVentas = Double(self.cantidadTotal)
                 nuevaVenta.claveVenta = self.productosVenta?[indexPath.row].claveProduct
-                nuevaVenta.total = Double(self.ventaCantidad)
+                nuevaVenta.nombreProducto = self.productosVenta?[indexPath.row].nombreProduct
+                nuevaVenta.total = self.productosVenta?[indexPath.row].total ?? 0
                 nuevaVenta.cantidadVenta = self.productosVenta?[indexPath.row].cantidadProduct ?? 0
                 
                 let nuevoStock = (self.productosVenta?[indexPath.row].cantidadProduct ?? 0) - (cantidad ?? 0)
-                self.ventaCantidad = Int(cantidad ?? 0)
                 self.productosVenta?[indexPath.row].cantidadProduct = nuevoStock
                 try! self.context.save()
-                self.retriveData()
             }
+            self.retriveData()
         }
+        
         alert.addAction(botonAlert)
         self.present(alert, animated: true)
         
