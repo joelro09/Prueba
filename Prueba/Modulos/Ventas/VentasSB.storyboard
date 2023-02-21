@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--VentasVC-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="VentasVC" customModule="Prueba" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="5Gm-Ff-x97">
+                                <rect key="frame" x="8" y="71" width="377" height="691"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJI-tw-JBP">
+                                <rect key="frame" x="16.000000000000004" y="764" width="41.333333333333343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aND-kL-k7B">
+                                <rect key="frame" x="284" y="764" width="79" height="35"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Vender" cornerStyle="capsule">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="venderAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="xnL-ll-bNr"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aND-kL-k7B" firstAttribute="top" secondItem="5Gm-Ff-x97" secondAttribute="bottom" constant="2" id="AeN-Aa-pdT"/>
+                            <constraint firstItem="vJI-tw-JBP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Aom-yY-MZ8"/>
+                            <constraint firstItem="5Gm-Ff-x97" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="12" id="EIT-YC-NTM"/>
+                            <constraint firstItem="vJI-tw-JBP" firstAttribute="top" secondItem="5Gm-Ff-x97" secondAttribute="bottom" constant="2" id="SLp-FO-ZJx"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="5Gm-Ff-x97" secondAttribute="trailing" constant="8" id="ceO-kj-TQl"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="aND-kL-k7B" secondAttribute="trailing" constant="30" id="kbR-4r-KEM"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="vJI-tw-JBP" secondAttribute="bottom" constant="33" id="rjd-mY-4Ar"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="aND-kL-k7B" secondAttribute="bottom" constant="19" id="xGw-B9-l6C"/>
+                            <constraint firstItem="5Gm-Ff-x97" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="y5D-3U-udD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="TotalVentasLbl" destination="vJI-tw-JBP" id="WiH-45-fQG"/>
+                        <outlet property="tableVentas" destination="5Gm-Ff-x97" id="zos-ld-Y7D"/>
+                        <segue destination="IGA-gj-CK7" kind="show" identifier="errorSegue" id="KQD-dw-dvp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135.1145038167939" y="3.5211267605633805"/>
+        </scene>
+        <!--ErrorView-->
+        <scene sceneID="jt8-o9-0Ax">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ErrorView" id="IGA-gj-CK7" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="2a5-y6-eKU"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kjm-ig-kCd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="953" y="4"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
